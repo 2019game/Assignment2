@@ -1,0 +1,3 @@
+//list all the varaibles
+//int example;//profile
+//float example2;//save
