@@ -1,5 +1,9 @@
-//list all the varaibles
+//list all the variables
 //int example;//profile
+
+//int width;//variable to store width of window to adjust the window size.
+//int height;//variable to store height of window to adjust the window size.
+
 //float example2;//save
 
 //float volume;//variable that will define the volume or gain of audio in dB.
