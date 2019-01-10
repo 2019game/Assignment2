@@ -1,0 +1,13 @@
+Our goals are as follows:
+- Create menu system
+- Create Profile system
+- Intergrate menu and Profile system
+- Find sprite and alphabet character sheets
+- Find sound assets
+- Create random map generator/map editor
+- Intergrate map system
+- Code player, items,  platforms, obstacles, enemies, objectives and physics
+- Code game with rules, score system and the list above
+- Code achievements
+- intergrate assets into program
+- TEST!!!
