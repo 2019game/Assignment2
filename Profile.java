@@ -12,6 +12,9 @@ public class Profile{
 	public String[] Saves;
 //==========================variables==============================
 	public int achivements;
+	int width;//variable to store width of window to adjust the window size.
+	int height;//variable to store height of window to adjust the window size.
+	boolean audio;//variable that defines whether or not sound will play.
 //=================================================================
 	Profile(){
 		System.out.printf("constructor\n");
@@ -44,6 +47,9 @@ public class Profile{
 				numOfSaves=0;
 //=================================defualt values==========================================
 				achivements=0;
+				int width=500;//variable to store width of window to adjust the window size.
+				int height=500;//variable to store height of window to adjust the window size.
+				boolean audio=true;//variable that defines whether or not sound will play.
 //=========================================================================================
 				save();
 				return true;
@@ -73,6 +79,9 @@ public class Profile{
 			}
 //===========================load values=======================================
 			achivements = (int)bis.read();
+			width = (int)bis.read();
+			hight = (int)bis.read();
+			audio = (boolean)bis.read();
 //==================================================================			
 		}
 		catch(Exception e) {
@@ -99,6 +108,9 @@ public class Profile{
 			}
 //=================================save values====================================
 			bos.write(achivements);
+			bos.write(width);
+			bos.write(hight);
+			bos.write(audio);
 //=====================================================================
 			bos.close();
 		}

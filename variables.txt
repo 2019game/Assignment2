@@ -1,11 +1,9 @@
 //list all the variables
-//int example;//profile
+I put astrix on variables when they are aded to the saveing system.
 
-//int width;//variable to store width of window to adjust the window size.
-//int height;//variable to store height of window to adjust the window size.
+*//int width;//variable to store width of window to adjust the window size.
+*//int height;//variable to store height of window to adjust the window size.
 
-//float example2;//save
+*//float volume;//variable that will define the volume or gain of audio in dB.
 
-//float volume;//variable that will define the volume or gain of audio in dB.
-
-//boolean audio;//variable that defines whether or not sound will play.
+*//boolean audio;//variable that defines whether or not sound will play.
