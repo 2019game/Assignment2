@@ -2,11 +2,6 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.*;
 
-//public class Save{
-//	
-//}
-
-
 public class Profile{
 	String fileSeparator = System.getProperty("file.separator");
 	public String nameOfProfile;
