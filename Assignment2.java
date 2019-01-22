@@ -13,8 +13,10 @@ public class Assignment2 extends GameEngine {
 	//====================================================================
 	
 	// Variable to keep track of Game State
-	int gameState;
 	
+	int gameState;
+	Profile p = new Profile();
+
 	// Variables to keep track of window width and height
 	int width;
 	int height;

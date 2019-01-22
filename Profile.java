@@ -22,15 +22,14 @@ public class Profile{
 	public float volume;
 	public boolean audio;//variable that defines whether or not sound will play.
 //=================================================================
-	Profile(){
-		System.out.printf("constructor\n");
-	}
 	public static void main(String args[]) {
 		System.out.printf("Hello World!\n");
 		Profile p = new Profile();
-		//p.createProfile("squid");
-		p.load("squid");
-		System.out.printf(""+p.volume);
+		//p.createProfile("drumer");
+		p.load("drumer");
+		//System.out.printf("\n:"+p.listOfProfiles()+":\n");
+		
+		System.out.printf(""+p.listOfProfiles()[0]);
 		if(p.audio){
 			System.out.printf("sound");
 		}
@@ -58,7 +57,6 @@ public class Profile{
 				f.createNewFile();
 				nameOfProfile = Name;
 				numOfSaves=0;
-				numberOfProfiles+=1;
 //=================================defualt values==========================================
 				achivements=0;
 				width=500;//variable to store width of window to adjust the window size.
@@ -68,17 +66,20 @@ public class Profile{
 				audio=true;//variable that defines whether or not sound will play.
 //=========================================================================================
 				save();
-				f = new File( System.getProperty("user.dir")+fileSeparator+"saves"+fileSeparator+nameOfProfile+fileSeparator+nameOfProfile+".prf");
+				String[] parray = this.listOfProfiles();
+				f = new File( System.getProperty("user.dir")+fileSeparator+"saves"+fileSeparator+"main.prf");
 				FileOutputStream outStream = null;
 				BufferedOutputStream bos = null;
 				try{
 					outStream = new FileOutputStream(f);
 					bos = new BufferedOutputStream(outStream);
-					bos.write(numberOfProfiles);
+					bos.write(numberOfProfiles+1);
 					for(int i=0;i<numberOfProfiles;i++){
-//						bos.write(this.listOfProfiles()[i].getBytes());
+						bos.write(parray[i].getBytes());
 						bos.write(0);
 					}
+					bos.write(nameOfProfile.getBytes());
+					bos.write(0);
 					bos.close();
 				}
 				catch(Exception e) {
@@ -96,41 +97,41 @@ public class Profile{
 		}
 		return false;
 	}
-	//public String[] listOfProfiles(){
-	//	File f = new File( System.getProperty("user.dir")+fileSeparator+"saves"+fileSeparator+"p.p");
-	//	InputStream inStream = null;
-	//	BufferedInputStream bis = null;
-	//	try {
-	//		// open input stream test.txt for reading purpose.
-	//		inStream = new FileInputStream(f);
-	//		// input stream is converted to buffered input stream
-	//		bis = new BufferedInputStream(inStream);			
-	//		// read until a single byte is available
-	//		numberOfProfiles=bis.read();
-	//		String[] parray = new String[numberOfProfiles];
-	//		for(int i=0;i<numberOfProfiles;i++){
-	//			int j=0;
-	//			char c= (char)bis.read();
-	//			while(c!=0){
-	//				parray[i][j]=c;
-	//				c=bis.read();
-	//				j++;
-	//			}
-	//		}
-	//		return parray;
-	//	}
-	//	catch(Exception e) {
-	//		// if any I/O error occurs
-	//		System.out.printf("\nlistOfProfiles exception\n");
-	//		e.printStackTrace();
-	//	}
-	//	finally {try{
-	//		// releases any system resources associated with the stream
-	//		if(inStream!=null) inStream.close();
-	//		if(bis!=null) bis.close();
-	//		}catch(Exception e){}
-	//	}
-	//}
+	public String[] listOfProfiles(){
+		File f = new File( System.getProperty("user.dir")+fileSeparator+"saves"+fileSeparator+"main.prf");
+		InputStream inStream = null;
+		BufferedInputStream bis = null;
+		try {
+			// open input stream test.txt for reading purpose.
+			inStream = new FileInputStream(f);
+			// input stream is converted to buffered input stream
+			bis = new BufferedInputStream(inStream);			
+			// read until a single byte is available
+			numberOfProfiles=bis.read();
+			String[] parray = new String[numberOfProfiles];
+			for(int i=0;i<numberOfProfiles;i++){
+				parray[i]="";
+				int c= (int)bis.read();
+				while(c!=0){
+					parray[i]+=(char)c;
+					c=(int)bis.read();
+				}
+			}
+			return parray;
+		}
+		catch(Exception e) {
+			// if any I/O error occurs
+			System.out.printf("\nlistOfProfiles exception\n");
+			e.printStackTrace();
+		}
+		finally {try{
+			// releases any system resources associated with the stream
+			if(inStream!=null) inStream.close();
+			if(bis!=null) bis.close();
+			}catch(Exception e){}
+		}
+		return new String[0];
+	}
 	public void load(String Name){
 		nameOfProfile = Name;
 		File f = new File( System.getProperty("user.dir")+fileSeparator+"saves"+fileSeparator+Name+fileSeparator+Name+".prf");
