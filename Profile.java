@@ -1,4 +1,6 @@
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.*;
 
 //public class Save{
 //	
@@ -13,9 +15,12 @@ public class Profile{
 	public int numberOfProfiles;
 //==========================variables==============================
 	public int achivements;
-	int width;//variable to store width of window to adjust the window size.
-	int height;//variable to store height of window to adjust the window size.
-	boolean audio;//variable that defines whether or not sound will play.
+	public int width;//variable to store width of window to adjust the window size.
+	public int height;//variable to store height of window to adjust the window size.
+	public int score;
+	public int playerHP;
+	public float volume;
+	public boolean audio;//variable that defines whether or not sound will play.
 //=================================================================
 	Profile(){
 		System.out.printf("constructor\n");
@@ -23,10 +28,17 @@ public class Profile{
 	public static void main(String args[]) {
 		System.out.printf("Hello World!\n");
 		Profile p = new Profile();
-		//p.createProfile("bob");
-		p.load("test3");
-		System.out.printf(""+p.achivements);
-		p.achivements = 50;
+		//p.createProfile("squid");
+		p.load("squid");
+		System.out.printf(""+p.volume);
+		if(p.audio){
+			System.out.printf("sound");
+		}
+		else{
+			System.out.printf("quite");
+		}
+		p.volume=0.8f;
+		p.audio = false;
 		p.save();
 		//Profile t = new Profile();
 		//t.load("test");
@@ -34,7 +46,6 @@ public class Profile{
 		System.out.printf("Hello World!\n");
 	}
 	public boolean createProfile(String Name){
-		//this.save();
 		File f = new File( System.getProperty("user.dir")+fileSeparator+"saves"+fileSeparator+Name+fileSeparator);
 		if(f.exists()){
 			System.out.printf("Profile already exists");
@@ -50,9 +61,11 @@ public class Profile{
 				numberOfProfiles+=1;
 //=================================defualt values==========================================
 				achivements=0;
-				int width=500;//variable to store width of window to adjust the window size.
-				int height=500;//variable to store height of window to adjust the window size.
-				//boolean audio=true;//variable that defines whether or not sound will play.
+				width=500;//variable to store width of window to adjust the window size.
+				height=500;//variable to store height of window to adjust the window size.
+				score=0;
+				volume=1;
+				audio=true;//variable that defines whether or not sound will play.
 //=========================================================================================
 				save();
 				f = new File( System.getProperty("user.dir")+fileSeparator+"saves"+fileSeparator+nameOfProfile+fileSeparator+nameOfProfile+".prf");
@@ -142,7 +155,13 @@ public class Profile{
 			achivements = (int)bis.read();
 			width = (int)bis.read();
 			height = (int)bis.read();
-			//audio = (boolean)bis.read();
+			score = (int)bis.read();
+			playerHP = (int)bis.read();
+			byte[] b = new byte[4];
+			bis.read(b,0,4);
+			volume = ByteBuffer.wrap(b).getFloat();
+			//volume = (float)bis.readFloat();
+			if((int)bis.read()==1){audio=true;}else{ audio=false;}
 //==================================================================			
 		}
 		catch(Exception e) {
@@ -172,7 +191,10 @@ public class Profile{
 			bos.write(achivements);
 			bos.write(width);
 			bos.write(height);
-			//bos.write(audio);
+			bos.write(score);
+			bos.write(playerHP);
+			bos.write( ByteBuffer.allocate(4).putFloat(volume).array() ,0,4);
+			if (audio) bos.write(1); else bos.write(0); 
 //=====================================================================
 			bos.close();
 		}
