@@ -1,5 +1,6 @@
 Our goals are as follows:
 - Create menu system
+- Create Profile system
 - Intergrate menu and Profile system
 - Find sprite and alphabet character sheets
 - Find sound assets
